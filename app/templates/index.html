@@ -7,11 +7,24 @@
     <title> {{ title }}</title>
     {% else %}
     <title> SPORTS APP</title>
-    {% endif %}
+    {% endif %} {% block styles%} {{ super() }}
+    <!-- <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}"> -->
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tenali+Ramakrishna&display=swap" rel="stylesheet"> {% endblock %}
 </head>
 
 <body>
+    {% block content %}
+    <!-- ======= Hero Section ======= -->
+    <section id="hero">
+        <div class="hero-container">
+            <h3>Welcome to <strong>SPORTS....</strong></h3>
 
+            <a href="sports" class="btn-get-started scrollto">Get Started</a>
+        </div>
+    </section>
+    <!-- End Hero -->
+    {% endblock %}
 </body>
 
 </html>
