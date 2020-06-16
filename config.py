@@ -1,8 +1,9 @@
-class Config:
+import os
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://nabalayo:karitie@localhost/sports'
+class Config:
+    
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = '1738'
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     UPLOADED_PHOTOS_DEST ='app/static/photos'
 
 
@@ -11,6 +12,7 @@ class ProdConfig(Config):
 
 
 class DevConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI_DEV')
     DEBUG = True
 
 config_options = {

@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/nabalayo/Athletiq/virtual"
+VIRTUAL_ENV="/home/collin/Documents/moringa-core/Python-Flask/week5/Athletiq/virtual"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
