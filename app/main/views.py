@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect,url_for,abort
 from . import main
-from flask_login import login_required
-from ..models import User
-from .forms import UpdateProfile
+from flask_login import login_required,current_user
+from ..models import User,Team
+from .forms import UpdateProfile,TeamForm
 from .. import db,photos
 
 
@@ -55,8 +55,29 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile', uname=uname))
 
-@main.route('/sports', methods=['GET', 'POST'])
+
+@main.route('/create_team', methods=['GET', 'POST'])
 @login_required
-def sports():
+def create_team():
+    manager=current_user
+    form = TeamForm()
+    check_team=Team.query.filter_by(manager=manager).first()
+    if check_team:
+        abort(404)
+      
+    if form.validate_on_submit():
+
+        team_name = form.team_name.data
+        category=  form.category.data          
+
+        # Updated team instance
+        this_team = Team(team_name=team_name, category=category, manager=manager, wins=0, draws=0, losses=0)
+
+        # save comment method
+        this_team.save_team()
+        return redirect(url_for('.index'))  
     
-    return render_template('sports.html')                  
+    
+    title = 'Create team'
+    return render_template('create_team.html',title = title, team_form=form)    
+                

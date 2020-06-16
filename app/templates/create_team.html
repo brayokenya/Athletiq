@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf%}
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h2>Create Team</h2>
+                <h5>Register only one team per account.</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            {{wtf.quick_form(team_form)}}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
