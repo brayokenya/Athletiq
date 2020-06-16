@@ -3,6 +3,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://nabalayo:karitie@localhost/sports'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = '1738'
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
 
 
 class ProdConfig(Config):
