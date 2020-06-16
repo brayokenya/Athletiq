@@ -1,6 +1,7 @@
 class Config:
 
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://nabalayo:karitie@localhost/sports'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class ProdConfig(Config):
