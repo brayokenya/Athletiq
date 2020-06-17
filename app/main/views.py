@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect,url_for,abort
 from . import main
 from flask_login import login_required,current_user
-from ..models import User,Team
-from .forms import UpdateProfile,TeamForm
+from ..models import User,Team,Player
+from .forms import UpdateProfile,TeamForm,PlayerForm
 from .. import db,photos
 
 
@@ -61,9 +61,9 @@ def update_pic(uname):
 def create_team():
     manager=current_user
     form = TeamForm()
-    check_team=Team.query.filter_by(manager=manager).first()
+    check_team=Team.query.filter_by(user=manager).first()
     if check_team:
-        abort(404)
+        return redirect(url_for('main.team_exists'))
       
     if form.validate_on_submit():
 
@@ -71,13 +71,69 @@ def create_team():
         category=  form.category.data          
 
         # Updated team instance
-        this_team = Team(team_name=team_name, category=category, manager=manager, wins=0, draws=0, losses=0)
+        this_team = Team(team_name=team_name, category=category, user=manager, wins=0, draws=0, losses=0)
 
         # save comment method
         this_team.save_team()
-        return redirect(url_for('.index'))  
+        return redirect(url_for('.add_players'))  
     
     
     title = 'Create team'
-    return render_template('create_team.html',title = title, team_form=form)    
-                
+    return render_template('create_team.html',title = title, team_form=form)  
+
+
+
+@main.route('/team_exists')
+def team_exists():
+    
+    return render_template("team_exists.html")  
+
+
+@main.route('/add_players', methods=['GET', 'POST'])
+@login_required
+def add_players():
+    manager=current_user
+    form = PlayerForm()
+    team=Team.query.filter_by(user=manager).first()
+    players =Player.query.filter_by(player_team=team)  
+      
+    if form.validate_on_submit():
+
+        name = form.name.data
+        position= form.position.data          
+
+        # Updated player instance
+        this_player = Player(name=name, playing_position=position, player_team=team)
+
+        # save player method
+        this_player.save_player()
+        return redirect(url_for('.add_players'))
+
+    title = 'Add players'
+    return render_template('add_players.html',title = title, player_form=form, team=team, players=players)
+
+
+
+@main.route('/teams', methods=['GET'])
+def teams():
+    football=Team.query.filter_by(category='football').all()
+    basketball=Team.query.filter_by(category='basketball').all()
+    cricket=Team.query.filter_by(category='cricket').all()              
+    hockey=Team.query.filter_by(category='hockey').all()
+    rugby=Team.query.filter_by(category='rugby').all()
+
+    title='Teams'
+    return render_template('teams.html', title=title, football=football, cricket=cricket, basketball=basketball, hockey=hockey, rugby=rugby)
+
+
+
+@main.route('/teams/<team_id>', methods=['GET'])
+def view_team(team_id):
+    team=Team.query.filter_by(id=team_id).first()
+    players=Player.query.filter_by(player_team=team)
+
+    title=team.team_name
+    return render_template('view_team.html', team=team, players=players)
+
+
+    

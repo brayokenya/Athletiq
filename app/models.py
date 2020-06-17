@@ -16,7 +16,7 @@ class User(UserMixin,db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     password_secure = db.Column(db.String(255))
-    team = db.relationship('Team',backref = 'manager',lazy = "dynamic")
+    team = db.relationship('Team',backref = 'user',lazy = "dynamic")
 
     @property
     def password(self):
@@ -31,7 +31,7 @@ class User(UserMixin,db.Model):
         return check_password_hash(self.password_secure,password)
 
     def __repr__(self):
-        return f'{self.username}'
+        return f'{self.email}'
 
 
 
@@ -46,6 +46,7 @@ class Team(db.Model):
     wins = db.Column(db.Integer)
     draws= db.Column(db.Integer)
     losses=db.Column(db.Integer)
+    player_team=db.relationship('Player',backref = 'player_team',lazy = "dynamic")
     
 
     def save_team(self):
@@ -55,3 +56,21 @@ class Team(db.Model):
     
     def __repr__(self):
         return f'{self.team_name}'
+
+
+class Player(db.Model):
+    __tablename__ = 'players'
+    id = db.Column(db.Integer,primary_key = True)
+    name=db.Column(db.String)
+    playing_position=db.Column(db.String)       
+    prof_pic_path = db.Column(db.String) 
+    team = db.Column(db.Integer,db.ForeignKey("teams.id"))
+    
+
+    def save_player(self):
+        db.session.add(self)
+        db.session.commit()
+
+    
+    def __repr__(self):
+        return f'{self.name}'

@@ -72,6 +72,11 @@
     border: 2px solid #e43c5c;
 }
 
+.jumbo1{
+    padding: 2% !important;
+}
+
+
 @media (min-width: 1024px) {
     #hero {
         background-attachment: fixed;

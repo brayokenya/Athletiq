@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron jumbo1">
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <h3>Football teams</h3>
+                <ul>
+                    {{macro.displayTeams(football)}}
+                </ul>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <h3>Cricket teams</h3>
+                <ul>
+                    {{macro.displayTeams(cricket)}}
+                </ul>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <h3>Basketball teams</h3>
+                <ul>
+                    {{macro.displayTeams(basketball)}}
+                </ul>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <h3>Rugby teams</h3>
+                <ul>
+                    {{macro.displayTeams(rugby)}}
+                </ul>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <h3>Hockey teams</h3>
+                <ul>
+                    {{macro.displayTeams(hockey)}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
