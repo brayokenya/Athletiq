@@ -40,6 +40,7 @@ class Team(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     team_name=db.Column(db.String)
     category=db.Column(db.String)
+    location=db.Column(db.String)
     created_at = db.Column(db.DateTime,default=datetime.utcnow)    
     manager = db.Column(db.Integer,db.ForeignKey("users.id"))
     team_pic_path = db.Column(db.String) 

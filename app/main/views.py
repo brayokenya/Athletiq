@@ -68,10 +68,11 @@ def create_team():
     if form.validate_on_submit():
 
         team_name = form.team_name.data
-        category=  form.category.data          
+        category=  form.category.data  
+        location = form.location.data        
 
         # Updated team instance
-        this_team = Team(team_name=team_name, category=category, user=manager, wins=0, draws=0, losses=0)
+        this_team = Team(team_name=team_name, category=category, user=manager,location=location, wins=0, draws=0, losses=0)
 
         # save comment method
         this_team.save_team()

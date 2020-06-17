@@ -9,6 +9,7 @@
             <div class="col-xs-12 text-center">
                 <h1>{{team.team_name}}</h1>
                 <h3 class="text-muted">{{team.category | upper}} TEAM</h3> 
+                <h3>Location: {{team.location | capitalize}}</h3>
                 <h4 class="text-muted">Registered on: {{team.created_at.strftime("%d %b %Y %I:%M %p")}}</h4>               
             </div>
         </div>        
