@@ -1,10 +1,22 @@
-#hero {
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('https://images.complex.com/complex/images/c_fill,dpr_auto,f_auto,q_90,w_1400/fl_lossy,pg_1/isy0qmbfazbupgmsgpnr/basektball-net');
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    overflow-y: scroll;
+    position: relative;
+}
+
+
+/* #hero {
     width: 100%;
     height: 100vh;
     background: url("../image/back.jpeg") top center;
     background-size: cover;
     position: relative;
-}
+} */
 
 #hero:before {
     content: "";
@@ -72,10 +84,9 @@
     border: 2px solid #e43c5c;
 }
 
-.jumbo1{
+.jumbo1 {
     padding: 2% !important;
 }
-
 
 @media (min-width: 1024px) {
     #hero {
