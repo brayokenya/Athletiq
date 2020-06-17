@@ -1,0 +1,35 @@
+{% macro displayPlayers(players) %}
+
+    {% for player in players %}
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="card">
+                <div class="card-body">                   
+                    <p class="card-text">{{player.name}}</p>
+                    <h6 class="card-subtitle mb-2 text-muted">{{player.playing_position | capitalize}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">-{{player.player_team}}</h6>                                       
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% endmacro %}
+
+
+{% macro displayTeams(teams) %}
+
+    {% if teams %}
+
+    {% for team in teams %}
+    
+    <li><a href="/teams/{{team.id}}">{{team.team_name}}</a></li>
+        
+    {% endfor %}
+
+    {% else %}
+
+    <li>No teams registered.</li>
+
+    {% endif %}
+
+{% endmacro %}
