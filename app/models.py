@@ -75,3 +75,13 @@ class Player(db.Model):
     
     def __repr__(self):
         return f'{self.name}'
+
+class Fixture(db.Model):
+    __tablename__ = 'fixtures'
+    id = db.Column(db.Integer,primary_key = True)
+    date = db.Column(db.String(20))
+    time = db.Column(db.String()) 
+    location = db.Column(db.String(20))  
+
+
+    

@@ -1,18 +1,15 @@
-{% extends 'base.html'%}
-{% import 'macros.html' as macro%}
-
-{% block content %}
+{% extends 'base.html'%} {% import 'macros.html' as macro%} {% block content %}
 
 <div class="container">
     <div class="jumbotron jumbo1">
         <div class="row">
             <div class="col-xs-12 text-center">
                 <h1>{{team.team_name}}</h1>
-                <h3 class="text-muted">{{team.category | upper}} TEAM</h3> 
+                <h3 class="text-muted">{{team.category | upper}} TEAM</h3>
                 <h3>Location: {{team.location | capitalize}}</h3>
-                <h4 class="text-muted">Registered on: {{team.created_at.strftime("%d %b %Y %I:%M %p")}}</h4>               
+                <h4 class="text-muted">Registered on: {{team.created_at.strftime("%d %b %Y %I:%M %p")}}</h4>
             </div>
-        </div>        
+        </div>
     </div>
 </div>
 
@@ -20,7 +17,9 @@
     <div class="jumbotron jumbo1">
         <div class="row">
             {{macro.displayPlayers(players)}}
-        </div>       
+            <a class="btn btn-outline-secondary text-white" href="{{url_for('auth.book_fixture', team_id=team.id)}}">Book a fixture</a>&nbsp;&nbsp;
+
+        </div>
     </div>
 </div>
 

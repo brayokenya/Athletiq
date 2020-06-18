@@ -3,6 +3,8 @@ from wtforms import StringField,PasswordField,BooleanField,SubmitField
 from wtforms.validators import Required,Email,EqualTo
 from ..models import User
 from wtforms import ValidationError
+from wtforms.fields.html5 import DateField, TimeField
+
 
 
 class RegistrationForm(FlaskForm):
@@ -24,4 +26,12 @@ class LoginForm(FlaskForm):
     email = StringField('Your Email Address',validators=[Required(),Email()])
     password = PasswordField('Password',validators =[Required()])
     remember = BooleanField('Remember me')
-    submit = SubmitField('Sign In')        
+    submit = SubmitField('Sign In')  
+
+class FixtureForm(FlaskForm):
+    Date = DateField('Fixture\'s Date', format='%Y-%m-%d')
+    Time = TimeField('Start Time',validators=[Required()], render_kw={"placeholder": "Format: 12.00"})    
+    Location = StringField('Game\'s Location',validators=[Required()], render_kw={"placeholder": "E.g: Nairobi"})
+    submit = SubmitField('Request Fixture')
+    
+      

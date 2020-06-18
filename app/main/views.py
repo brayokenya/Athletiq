@@ -136,5 +136,16 @@ def view_team(team_id):
     title=team.team_name
     return render_template('view_team.html', team=team, players=players)
 
+# @main.route('/fixture', methods=['GET', 'POST'])
+# @login_required
+# def book_fixture():
 
+#     form = FixtureForm()
+#     '''
+#     view page that retunrs fixture page with its data
+#     '''
     
+#     title = 'Book a Fixture'
+
+
+#     return render_template('fixture.html', title=title, fixture_form=form)

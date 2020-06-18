@@ -19,3 +19,9 @@ class PlayerForm(FlaskForm):
     position = StringField('Player\'s position',validators=[Required()])
     submit = SubmitField('Add player')
     
+# class FixtureForm(FlaskForm):
+#     Date = DateField('Fixture\'s Date',validators=[Required()], format='%d-%m-%Y')
+#     Time = TimeField('Start Time',validators=[Required()], render_kw={"placeholder": "Format: 12.00"})    
+#     Location = StringField('Game\'s Location',validators=[Required()], render_kw={"placeholder": "E.g: Nairobi"})
+#     submit = SubmitField('Request Fixture')
+    
