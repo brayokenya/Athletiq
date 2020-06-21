@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card" style="width: 25rem;">
+        <div class="card-body">
+          <div class="card-text">
+            <h3>Hello {{team.user.username.capitalize()}}</h3>
+            <p>The fixture you requested to have with {{fixture.opponent}} on {{fixture.date}} at {{fixture.time}} in {{fixture.location}}, location has been {{heading.upper()}}!</p>
+            {% if heading == 'Confirmed'%}
+            <p>See you there!</p>
+            {% elif heading == 'Declined' %}
+            <p>Try again another day!</p>
+            {% endif %}
+            <p>Kind regards,<br>Athletiq Management</p>
+          </div>
+        </div>
+    </div>
+</body>
+</html>

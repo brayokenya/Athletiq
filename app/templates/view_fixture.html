@@ -1,0 +1,26 @@
+{% extends 'base.html'%} {% import 'macros.html' as macro%} {% block content %}
+<!--Flash message -->
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  {{ message }}
+</div>
+{% endfor %}
+<div class="container">
+    <div class="jumbotron jumbo1">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1>{{fixture.requester}} vs {{fixture.opponent}}</h1>
+                <h3 class="text-muted">{{requested.category | upper}} MATCH</h3>
+                <h3>Date: {{fixture.date}}</h3>
+                <h3>Location: {{fixture.location | capitalize}}</h3>
+                <h3>Time: {{fixture.time}}</h3>
+                {% if requesting.team_name == fixture.opponent %}
+                <a href="{{url_for('auth.decline', fixture_id=fixture.id)}}"><button>Decline</button></a>
+                <a href="{{url_for('auth.confirm', fixture_id=fixture.id)}}"><button>Accept</button></a>
+                {% endif%}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

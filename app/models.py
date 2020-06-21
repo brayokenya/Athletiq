@@ -26,14 +26,11 @@ class User(UserMixin,db.Model):
     def password(self, password):
         self.password_secure = generate_password_hash(password)
 
-
     def verify_password(self,password):
         return check_password_hash(self.password_secure,password)
 
     def __repr__(self):
         return f'{self.email}'
-
-
 
 class Team(db.Model):
     __tablename__ = 'teams'
@@ -48,16 +45,13 @@ class Team(db.Model):
     draws= db.Column(db.Integer)
     losses=db.Column(db.Integer)
     player_team=db.relationship('Player',backref = 'player_team',lazy = "dynamic")
-    
 
     def save_team(self):
         db.session.add(self)
         db.session.commit()
 
-    
     def __repr__(self):
         return f'{self.team_name}'
-
 
 class Player(db.Model):
     __tablename__ = 'players'
@@ -67,12 +61,10 @@ class Player(db.Model):
     prof_pic_path = db.Column(db.String) 
     team = db.Column(db.Integer,db.ForeignKey("teams.id"))
     
-
     def save_player(self):
         db.session.add(self)
         db.session.commit()
 
-    
     def __repr__(self):
         return f'{self.name}'
 
@@ -82,6 +74,12 @@ class Fixture(db.Model):
     date = db.Column(db.String(20))
     time = db.Column(db.String()) 
     location = db.Column(db.String(20))  
+    confirmed= db.Column(db.Integer)
+    declined= db.Column(db.Integer)
+    requester = db.Column(db.String())
+    opponent = db.Column(db.String())
 
+    def __repr__(self):
+        return f'{self.date}'
 
     
