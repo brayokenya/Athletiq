@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card" style="width: 25rem;">
+        <div class="card-body">
+          <div class="card-text">
+            <h3>Hello {{manager}}</h3>
+            <p><b>{{current_user.username.capitalize()}}</b> of <b>{{requesting}} {{requesting.category}} team</b> is requesting to have a match with you.<br>
+            Match details:</p>
+            <ol>
+                <li>DATE: {{fixture.date}}</li>
+                <li>LOCATION: {{fixture.location}}</li>
+                <li>TIME: {{fixture.time}}</li>
+            </ol>
+            <p>Click <a href="{{link}}">here</a> to accept or decline request.</p>
+            <p>Kind regards,<br>Athletiq Management</p>
+          </div>
+        </div>
+    </div>
+</body>
+</html>

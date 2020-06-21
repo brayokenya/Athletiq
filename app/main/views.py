@@ -1,10 +1,9 @@
 from flask import render_template, request, redirect,url_for,abort
 from . import main
 from flask_login import login_required,current_user
-from ..models import User,Team,Player
+from ..models import User,Team,Player,Fixture
 from .forms import UpdateProfile,TeamForm,PlayerForm
 from .. import db,photos
-
 
 #views
 @main.route('/')
@@ -55,7 +54,6 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile', uname=uname))
 
-
 @main.route('/create_team', methods=['GET', 'POST'])
 @login_required
 def create_team():
@@ -82,13 +80,10 @@ def create_team():
     title = 'Create team'
     return render_template('create_team.html',title = title, team_form=form)  
 
-
-
 @main.route('/team_exists')
 def team_exists():
     
     return render_template("team_exists.html")  
-
 
 @main.route('/add_players', methods=['GET', 'POST'])
 @login_required
@@ -113,8 +108,6 @@ def add_players():
     title = 'Add players'
     return render_template('add_players.html',title = title, player_form=form, team=team, players=players)
 
-
-
 @main.route('/teams', methods=['GET'])
 def teams():
     football=Team.query.filter_by(category='football').all()
@@ -126,26 +119,13 @@ def teams():
     title='Teams'
     return render_template('teams.html', title=title, football=football, cricket=cricket, basketball=basketball, hockey=hockey, rugby=rugby)
 
-
-
 @main.route('/teams/<team_id>', methods=['GET'])
+@login_required
 def view_team(team_id):
     team=Team.query.filter_by(id=team_id).first()
     players=Player.query.filter_by(player_team=team)
+    current_team= Team.query.filter_by(manager=current_user.id).first() #requesting team
 
     title=team.team_name
-    return render_template('view_team.html', team=team, players=players)
+    return render_template('view_team.html', team=team, players=players, current=current_team, title=title)
 
-# @main.route('/fixture', methods=['GET', 'POST'])
-# @login_required
-# def book_fixture():
-
-#     form = FixtureForm()
-#     '''
-#     view page that retunrs fixture page with its data
-#     '''
-    
-#     title = 'Book a Fixture'
-
-
-#     return render_template('fixture.html', title=title, fixture_form=form)

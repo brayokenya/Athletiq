@@ -12,16 +12,18 @@
         </div>
     </div>
 </div>
-
+{% if players %}
 <div class="container">
     <div class="jumbotron jumbo1">
         <div class="row">
             {{macro.displayPlayers(players)}}
+            {% if team.id != current.id%}
+            {% if team.category == current.category%}
             <a class="btn btn-outline-secondary text-white" href="{{url_for('auth.book_fixture', team_id=team.id)}}">Book a fixture</a>&nbsp;&nbsp;
-
+            {% endif%}
+            {% endif%}
         </div>
     </div>
 </div>
-
-
+{% endif%}
 {% endblock %}
